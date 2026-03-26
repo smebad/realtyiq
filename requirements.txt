@@ -1,0 +1,34 @@
+# Data
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+xgboost==2.0.3
+shap==0.45.0
+
+# API
+fastapi==0.111.0
+uvicorn==0.29.0
+sqlalchemy==2.0.30
+pydantic==2.7.1
+python-dotenv==1.0.1
+
+# Search and Embeddings
+sentence-transformers==3.0.1
+faiss-cpu==1.8.0
+
+# LLM
+huggingface-hub==0.23.2
+transformers==4.41.2
+
+# UI
+streamlit==1.35.0
+plotly==5.22.0
+
+# Testing
+pytest==8.2.0
+httpx==0.27.0
+
+# Utilities
+jupyter==1.0.0
+matplotlib==3.9.0
+seaborn==0.13.2
