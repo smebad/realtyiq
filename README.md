@@ -30,6 +30,8 @@ This project is being built incrementally and documented phase by phase.
 
 ## 📁 Project Structure
 *(Updated as each phase is completed)*
+- `src/data/loader.py` — Raw data loading and schema validation
+- `src/data/cleaner.py` — Null handling, type fixes, outlier removal
 
 ## 🚀 How to Run
 *(Coming soon — updated after deployment phase)*
