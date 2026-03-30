@@ -32,6 +32,7 @@ This project is being built incrementally and documented phase by phase.
 *(Updated as each phase is completed)*
 - `src/data/loader.py` — Raw data loading and schema validation
 - `src/data/cleaner.py` — Null handling, type fixes, outlier removal
+- `src/data/features.py` — Feature engineering (age, area, quality, interactions)
 
 ## 🚀 How to Run
 *(Coming soon — updated after deployment phase)*
