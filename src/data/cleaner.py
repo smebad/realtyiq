@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 # Configure module level logger
-logger = logging.getlogger(__name__)
+logger = logging.getLogger(__name__)
 
 # Columns to drop: too many missing values or not relevant for ML pipeline
 COLUMNS_TO_DROP = [
@@ -61,7 +61,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
 # Helper function to drop columns that are low value or leaky
 def _drop_useless_columns(df: pd.DataFrame) -> pd.DataFrame:
-  cols_present = [col for col in COLUMNS_TO_DROP if c in df.columns]
+  cols_present = [col for col in COLUMNS_TO_DROP if col in df.columns]
   df = df.drop(columns=cols_present)
   logger.info(f"Dropped {len(cols_present)} columns: {cols_present}")
   return df

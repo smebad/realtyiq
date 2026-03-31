@@ -5,7 +5,7 @@ import pandas as pd
 
 # Configure module level logger
 logging.basicConfig(level=logging.INFO)
-logger = logging.getlogger(__name__)
+logger = logging.getLogger(__name__)
 
 # Columns for ML pipeline
 REQUIRED_COLUMNS = [
