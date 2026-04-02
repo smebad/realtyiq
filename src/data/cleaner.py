@@ -119,7 +119,7 @@ def _remove_outliers(df: pd.DataFrame) -> pd.DataFrame:
 
   # Remove sale prices below $10k
   if "SalePrice" in df.columns:
-    df = df[df["SalePrice"] <= 10_000]
+    df = df[df["SalePrice"] >= 10_000]
 
   removed = original_len - len(df)
   logger.info(f"Removed {removed} outlier rows. Remaining: {len(df):,}")
