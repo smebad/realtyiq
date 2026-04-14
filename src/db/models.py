@@ -14,7 +14,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from src.db.database import Base
 
 # Core property listing table
-class Listings(Base):
+class Listing(Base):
   __tablename__ = "listings"
 
   # Primary key
