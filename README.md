@@ -35,6 +35,7 @@ This project is being built incrementally and documented phase by phase.
 - `src/data/features.py` — Feature engineering (age, area, quality, interactions)
 - `src/db/models.py` — SQLAlchemy ORM: Listing, PredictionLog, ChatLog tables
 - `src/db/crud.py` — All database operations (Create, Read, Update, Delete)
+- `src/db/seed.py` — Seeds 2,925 real property listings into SQLite
 
 ## 🚀 How to Run
 *(Coming soon — updated after deployment phase)*
