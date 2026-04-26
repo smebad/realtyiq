@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import shap
-from sklearn.metrics import mean_absolute_error, mean_squarred_error, r2_score
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from xgboost import XGBRegressor
 
 logging.basicConfig(level=logging.INFO)
