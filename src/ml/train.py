@@ -77,10 +77,12 @@ def run_training_pipeline() -> dict:
 
     # 5. Cross validation
     logger.info("Running 5-fold cross validation ...")
-    cv_model = XGBRegressor(**{
-        k: v for k, v in XGBOOST_PARAMS.items()
-        if k != "early_stopping_rounds"
-    }, n_estimators=300)
+    cv_params = {
+    k: v for k, v in XGBOOST_PARAMS.items()
+    if k != "early_stopping_rounds"
+}   
+    cv_params["n_estimators"] = 300  # lighter model for CV speed
+    cv_model = XGBRegressor(**cv_params)
 
     cv_scores = cross_val_score(
         cv_model, X_train, y_train,
@@ -130,6 +132,7 @@ def run_training_pipeline() -> dict:
     return metrics
 
 # Function for target encoding high-cardinality categorical features
+# NEW — replace with this
 def _target_encode(
     df: pd.DataFrame,
     cols: list[str],
@@ -140,9 +143,19 @@ def _target_encode(
     if not available:
         return df, None
 
-    encoder = TargetEncoder(smooth="auto", random_state=42)
-    df[available] = encoder.fit_transform(df[available], df[target])
+    # These columns may still be string — convert to str
+    for col in available:
+        df[col] = df[col].astype(str)
 
+    encoder = TargetEncoder(smooth="auto", random_state=42)
+
+    # fit_transform returns a 2D numpy array
+    encoded_array = encoder.fit_transform(df[available], df[target])
+
+    for i, col in enumerate(available):
+        df[col] = encoded_array[:, i]
+
+    logger.info(f"Target-encoded columns: {available}")
     return df, encoder
 
 # Function for saving model artifacts

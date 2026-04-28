@@ -28,7 +28,7 @@ def evaluate_model(
   y_pred = np.expm1(y_pred_log)
   y_true = np.expm1(y_test)
 
-  rmse = float(np.sqrt(mean_squarred_error(y_true, y_pred)))
+  rmse = float(np.sqrt(mean_squared_error(y_true, y_pred)))
   mae = float(mean_absolute_error(y_true, y_pred))
   r2 = float(r2_score(y_true, y_pred))
   mape = float(np.mean(np.abs((y_true - y_pred) / y_true)) * 100)

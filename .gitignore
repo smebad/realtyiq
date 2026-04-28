@@ -7,3 +7,12 @@ __pycache__/
 *.pyc
 data/processed/
 realtyiq.db
+outputs/
+artifacts/
+results/
+plots/
+images/
+*.png
+*.jpg
+*.jpeg
+*.json

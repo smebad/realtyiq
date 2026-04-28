@@ -13,5 +13,5 @@ df = engineer_features(df)
 
 Path("data/processed").mkdir(exist_ok=True)
 df.to_csv("data/processed/ames_featured.csv", index=False)
-print(f"Saved {len(df)} rows to data/processed/ames_featured.csv")
+print(f"Saved {len(df)} rows, {len(df.columns)} columns")
 print(f"Columns: {list(df.columns)}")

@@ -120,7 +120,8 @@ def _encode_categoricals(df: pd.DataFrame) -> pd.DataFrame:
     object_cols = df.select_dtypes(include=["object"]).columns.tolist()
 
     # Remove target if somehow present in object cols
-    object_cols = [c for c in object_cols if c != "SalePrice"]
+    HIGH_CARD = ["Neighborhood", "House Style", "MS SubClass"]
+    object_cols = [c for c in object_cols if c not in ["SalePrice"] + HIGH_CARD]
 
     le = LabelEncoder()
     for col in object_cols:
