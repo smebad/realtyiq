@@ -16,3 +16,4 @@ images/
 *.jpg
 *.jpeg
 *.json
+models/*.pkl
