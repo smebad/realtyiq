@@ -42,4 +42,14 @@ This project is being built incrementally and documented phase by phase.
 *(Coming soon — updated after deployment phase)*
 
 ## 📊 ML Metrics
-*(Updated after model training phase)*
+
+| Metric | Value |
+|--------|-------|
+| R² Score | 0.94 |
+| CV R² (5-fold) | 0.906 ± 0.008 |
+| RMSE | ~$20,061 |
+| MAE | ~$12,610 |
+| MAPE | 6.94% |
+
+> 📓 See full training walkthrough with SHAP plots:
+> [`notebooks/03_model_training.ipynb`](notebooks/03_model_training.ipynb)
