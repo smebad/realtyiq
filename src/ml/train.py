@@ -18,11 +18,12 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Paths
-RAW_DATA_PATH   = Path("data/raw/AmesHousing.csv")
-MODEL_DIR       = Path("models")
-MODEL_PATH      = MODEL_DIR / "xgboost_price_model.pkl"
-METADATA_PATH   = MODEL_DIR / "model_metadata.json"
-ENCODER_PATH    = MODEL_DIR / "target_encoder.pkl"
+ROOT          = Path(__file__).resolve().parents[2]
+RAW_DATA_PATH = ROOT / "data/raw/AmesHousing.csv"
+MODEL_DIR     = ROOT / "models"
+MODEL_PATH    = MODEL_DIR / "xgboost_price_model.pkl"
+METADATA_PATH = MODEL_DIR / "model_metadata.json"
+ENCODER_PATH  = MODEL_DIR / "target_encoder.pkl"
 
 # Config
 TARGET          = "SalePrice"

@@ -8,9 +8,11 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-MODEL_PATH    = Path("models/xgboost_price_model.pkl")
-METADATA_PATH = Path("models/model_metadata.json")
-ENCODER_PATH  = Path("models/target_encoder.pkl")
+# Paths
+ROOT          = Path(__file__).resolve().parents[2]
+MODEL_PATH    = ROOT / "models/xgboost_price_model.pkl"
+METADATA_PATH = ROOT / "models/model_metadata.json"
+ENCODER_PATH  = ROOT / "models/target_encoder.pkl"
 
 # Module-level cache — model loads once, stays in memory
 _model    = None

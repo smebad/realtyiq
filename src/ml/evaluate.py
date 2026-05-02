@@ -11,7 +11,8 @@ from xgboost import XGBRegressor
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-PLOTS_DIR = Path("models/plots")
+ROOT      = Path(__file__).resolve().parents[2]
+PLOTS_DIR = ROOT / "models/plots"
 PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Function to calculate all regression metrics
