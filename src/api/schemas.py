@@ -20,6 +20,7 @@ class ListingBase(BaseModel):
     garage_cars:         int   = Field(0, ge=0, example=2)
     central_air:         bool  = Field(True, example=True)
     sale_price:          Optional[float] = Field(None, gt=0, example=208500)
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
 # Request body for creating a new listing
 class ListingCreate(ListingBase):
@@ -35,6 +36,7 @@ class ListingUpdate(BaseModel):
     overall_qual:   Optional[int]   = None
     sale_price:     Optional[float] = None
     description:    Optional[str]   = None
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
 # Response body for listing endpoints, includes DB-generated fields and optional predicted price/description
 class ListingResponse(ListingBase):
@@ -56,6 +58,7 @@ class ListingListResponse(BaseModel):
     page:     int
     per_page: int
     listings: list[ListingResponse]
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
 # PREDICTION
 # Input features for prediction and response format with confidence range and model info
@@ -73,7 +76,8 @@ class PredictRequest(BaseModel):
     fireplaces:       int   = Field(0, ge=0, le=5, example=1)
     lot_area:         float = Field(8000, gt=0, example=8000)
     central_air:      bool  = Field(True, example=True)
-    neighborhood:     str   = Field("CollgCr", example="CollgCr")
+    neighborhood: str = Field(..., json_schema_extra={"example": "CollgCr"})
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
     @field_validator("gr_liv_area", "lot_area")
     @classmethod
@@ -89,6 +93,7 @@ class PredictResponse(BaseModel):
     model_version:    str
     r2_score:         float
     input_summary:    dict        # echo back key inputs for transparency
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
 # SEARCH
 # Filters for property search and natural language semantic search query with pagination and top-k results
@@ -100,23 +105,27 @@ class SearchRequest(BaseModel):
     min_area:       Optional[float] = Field(None, ge=0)
     page:           int             = Field(1, ge=1)
     per_page:       int             = Field(20, ge=1, le=100)
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
 # Natural language semantic search query with top-k results for relevance ranking
 class SemanticSearchRequest(BaseModel):
     query:   str = Field(..., min_length=3, example="3 bedroom house with garage near good schools")
     top_k:   int = Field(5, ge=1, le=20)
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
 # AI ASSISTANT
 # User message to the AI assistant and response format with source listing IDs and count for transparency
 class ChatRequest(BaseModel):
     message: str = Field(..., min_length=2,
                         example="Which neighborhoods have the best price per sqft?")
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
 # AI assistant response with source listings and count for transparency and trustworthiness
 class ChatResponse(BaseModel):
     answer:              str
     retrieved_listing_ids: list[int]
     sources_used:        int
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
 # GENERAL
 # Health check response with model and DB status for monitoring and reliability
@@ -125,6 +134,7 @@ class HealthResponse(BaseModel):
     model_loaded:  bool
     db_connected:  bool
     total_listings: int
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
 # Statistics response with aggregated data for insights and market trends
 class StatsResponse(BaseModel):
@@ -133,3 +143,4 @@ class StatsResponse(BaseModel):
     min_price:      float
     max_price:      float
     neighborhoods:  list[str]
+    model_config = {"populate_by_name": True, "protected_namespaces": ()}

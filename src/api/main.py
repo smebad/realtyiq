@@ -9,8 +9,18 @@ from src.db.crud import count_listings
 from src.db.database import SessionLocal
 from src.api.schemas import HealthResponse
 
+from contextlib import asynccontextmanager
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Startup event
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Starting RealtyIQ API ...")
+    create_all_tables()
+    logger.info("Database tables verified.")
+    yield
 
 # App definition
 app = FastAPI(
@@ -19,6 +29,7 @@ app = FastAPI(
     version     = "1.0.0",
     docs_url    = "/docs",
     redoc_url   = "/redoc",
+    lifespan    = lifespan,
 )
 
 # CORS — allows Streamlit UI to call the API
@@ -35,14 +46,6 @@ app.include_router(listings.router)
 app.include_router(predict.router)
 app.include_router(search.router)
 app.include_router(assistant.router)
-
-
-# Startup event
-@app.on_event("startup")
-async def startup_event():
-    logger.info("Starting RealtyIQ API ...")
-    create_all_tables()
-    logger.info("Database tables verified.")
 
 
 # Health check - used by Docker, deployment platforms, and monitoring tools

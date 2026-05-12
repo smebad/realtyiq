@@ -35,7 +35,7 @@ def get_listings(
     min_area: Optional[float] = None,
 ) -> list[Listing]:
     
-    query = db.query(Listing).filter(Listing.is_active == True)
+    query = db.query(Listing)
 
     if neighborhood:
         query = query.filter(Listing.neighborhood == neighborhood)
@@ -48,7 +48,7 @@ def get_listings(
     if min_area:
         query = query.filter(Listing.gr_liv_area >= min_area)
 
-    return query.order_by(desc(Listing.created_at)).offset(skip).limit(limit).all()
+    return query.order_by(desc(Listing.id)).offset(skip).limit(limit).all()
 
 # Function to fetch multiple listings by a list of IDs. Used by RAG context builder.
 def get_listings_by_ids(db: Session, ids: list[int]) -> list[Listing]:
@@ -70,11 +70,10 @@ def update_listing(
 
 # Function to soft-delete a listing by setting is_active=False. Returns success flag.
 def delete_listing(db: Session, listing_id: int) -> bool:
-
     listing = get_listing(db, listing_id)
     if not listing:
         return False
-    listing.is_active = False
+    db.delete(listing)
     db.commit()
     return True
 
