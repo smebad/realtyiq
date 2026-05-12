@@ -53,3 +53,22 @@ This project is being built incrementally and documented phase by phase.
 
 > 📓 See full training walkthrough with SHAP plots:
 > [`notebooks/03_model_training.ipynb`](notebooks/03_model_training.ipynb)
+
+## 🔌 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/health` | Health check |
+| GET | `/listings` | List all listings with filters |
+| GET | `/listings/{id}` | Get single listing |
+| POST | `/listings` | Create new listing |
+| PATCH | `/listings/{id}` | Update listing |
+| DELETE | `/listings/{id}` | Delete listing |
+| POST | `/predict` | Predict property price |
+| GET | `/predict/model-info` | Model metadata and metrics |
+| GET | `/search` | Filter-based search |
+| POST | `/search/semantic` | Semantic search (Phase 6) |
+| POST | `/assistant/chat` | AI assistant (Phase 7) |
+
+> Run locally: `uvicorn src.api.main:app --reload --port 8000`
+> Interactive docs: `http://localhost:8000/docs`
