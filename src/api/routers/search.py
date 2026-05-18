@@ -1,3 +1,5 @@
+from src.search.retriever import search as vector_search, get_index_stats
+
 import logging
 from typing import Optional
 
@@ -48,10 +50,28 @@ def filtered_search(
 
 # Semantic search endpoint for natural language queries over listings
 @router.post("/semantic")
-def semantic_search(body: SemanticSearchRequest):
-    
-    return {
-        "query":   body.query,
-        "results": [],
-        "message": "Semantic search will be wired in Phase 6",
-    }
+def semantic_search(
+    body: SemanticSearchRequest,
+    db: Session = Depends(get_db),
+):
+    try:
+        results = vector_search(query=body.query, db=db, top_k=body.top_k)
+        return {
+            "query":        body.query,
+            "total_results": len(results),
+            "results":      results,
+        }
+    except FileNotFoundError:
+        return {
+            "query":   body.query,
+            "results": [],
+            "message": "Search index not built yet. Run: python -m src.search.indexer",
+        }
+
+# Return FAISS index statistics
+@router.get("/index-stats")
+def index_stats():
+    try:
+        return get_index_stats()
+    except FileNotFoundError:
+        return {"message": "Index not built yet. Run: python -m src.search.indexer"}
