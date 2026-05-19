@@ -86,3 +86,19 @@ def test_chat_endpoint():
                            json={"message": "What are the cheapest neighborhoods?"})
     assert response.status_code == 200
     assert "answer" in response.json()
+
+# Test semantic search endpoint
+def test_semantic_search():
+    response = client.post("/search/semantic", json={
+        "query": "3 bedroom house with garage",
+        "top_k": 5
+    })
+    assert response.status_code == 200
+    data = response.json()
+    assert "results" in data
+    assert "query" in data
+
+# Test index stats endpoint
+def test_index_stats():
+    response = client.get("/search/index-stats")
+    assert response.status_code == 200
