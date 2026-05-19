@@ -72,3 +72,14 @@ This project is being built incrementally and documented phase by phase.
 
 > Run locally: `uvicorn src.api.main:app --reload --port 8000`
 > Interactive docs: `http://localhost:8000/docs`
+
+## 🔍 Semantic Search
+
+Users can search listings using natural language queries. The system uses
+`sentence-transformers/all-MiniLM-L6-v2` to encode both listings and queries
+into 384-dimensional vectors, then uses FAISS for millisecond similarity search.
+
+**Example queries:**
+- *"cozy 3 bedroom near good schools with garage"*
+- *"large modern house with fireplace and basement"*
+- *"affordable starter home good condition"*
