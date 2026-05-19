@@ -17,3 +17,7 @@ images/
 *.jpeg
 *.json
 models/*.pkl
+# FAISS / search index
+data/embeddings/
+*.bin
+*.npy
