@@ -26,11 +26,8 @@ def build_index(batch_size: int = 64) -> None:
     db = SessionLocal()
 
     try:
-        listings = (
-            db.query(Listing)
-            .filter(Listing.is_active == True)  # noqa: E712
-            .all()
-        )
+        listings = db.query(Listing).all()
+        
     finally:
         db.close()
 
@@ -41,7 +38,7 @@ def build_index(batch_size: int = 64) -> None:
 
     # 2. Convert listings to text
     logger.info("Converting listings to text descriptions ...")
-    texts      = [listing_to_text(l.to_dict()) for l in listings]
+    texts = [listing_to_text(l.to_dict()) for l in listings]
     listing_ids = np.array([l.id for l in listings], dtype=np.int64)
 
     # Peek at first description so we can verify quality

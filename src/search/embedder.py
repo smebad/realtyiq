@@ -46,7 +46,11 @@ def listing_to_text(listing: dict) -> str:
         5: "average", 6: "above average", 7: "good",
         8: "very good", 9: "excellent", 10: "outstanding"
     }
-    quality_label = quality_labels.get(int(quality), "average")
+    
+    try:
+        quality_label = quality_labels.get(int(float(quality)), "average")
+    except (ValueError, TypeError):
+        quality_label = "average"
 
     # Build natural language text
     parts = [
