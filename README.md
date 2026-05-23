@@ -83,3 +83,19 @@ into 384-dimensional vectors, then uses FAISS for millisecond similarity search.
 - *"cozy 3 bedroom near good schools with garage"*
 - *"large modern house with fireplace and basement"*
 - *"affordable starter home good condition"*
+
+## 🤖 AI Assistant (RAG)
+
+The AI assistant answers natural language questions grounded in real listing data.
+
+**How it works:**
+1. User asks a question in plain English
+2. System retrieves the 5 most relevant listings using FAISS semantic search
+3. Retrieved listings are formatted as context
+4. A local/hosted LLM (Mistral-7B or flan-t5) reads the context and answers
+5. Answer is grounded the LLM cannot hallucinate listings
+
+**Example questions:**
+- *"Which neighborhoods have the best price per sqft?"*
+- *"Find me a large home with a garage under $200,000"*
+- *"What makes the most expensive listings worth their price?"*
