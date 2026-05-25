@@ -133,7 +133,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# Helpers
+# HELPERS
+
 # GET request to the API
 def api_get(endpoint: str, params: dict = None) -> dict | None:
 
@@ -142,10 +143,13 @@ def api_get(endpoint: str, params: dict = None) -> dict | None:
         r.raise_for_status()
         return r.json()
     except requests.exceptions.ConnectionError:
-        st.error("Cannot connect to API. Make sure the FastAPI server is running: `uvicorn src.api.main:app --reload --port 8000`")
+        st.error("Cannot connect to API. Run: uvicorn src.api.main:app --reload --port 8000")
+        return None
+    except requests.exceptions.HTTPError as e:
+        st.error(f"API returned error {e.response.status_code}: {e.response.text}")
         return None
     except Exception as e:
-        st.error(f"API error: {e}")
+        st.error(f"Unexpected error calling {endpoint}: {type(e).__name__}: {e}")
         return None
 
 # POST request to the API
