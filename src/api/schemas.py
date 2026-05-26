@@ -41,12 +41,12 @@ class ListingUpdate(BaseModel):
 # Response body for listing endpoints, includes DB-generated fields and optional predicted price/description
 class ListingResponse(ListingBase):
     id:               int
-    total_bathrooms:  float
-    total_finished_area: float
-    house_age:        int
-    has_garage:       bool
-    was_remodeled:    bool
-    total_porch_area: float
+    total_bathrooms:  float = 0.0
+    total_finished_area: float = 0.0
+    house_age:        int = 0
+    has_garage:       bool = False
+    was_remodeled:    bool = False
+    total_porch_area: float = 0.0
     predicted_price:  Optional[float] = None
     description:      Optional[str]   = None
 
