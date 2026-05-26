@@ -62,7 +62,7 @@ def list_listings(
     min_bedrooms:  Optional[int]   = Query(None, ge=0),
     min_area:      Optional[float] = Query(None, ge=0),
     page:          int             = Query(1, ge=1),
-    per_page:      int             = Query(20, ge=1, le=100),
+    per_page:      int             = Query(20, ge=1, le=1000),
     db:            Session         = Depends(get_db),
 ):
     skip     = (page - 1) * per_page

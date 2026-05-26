@@ -26,7 +26,7 @@ def filtered_search(
     min_bedrooms:  Optional[int]   = Query(None),
     min_area:      Optional[float] = Query(None),
     page:          int             = Query(1, ge=1),
-    per_page:      int             = Query(20, ge=1, le=100),
+    per_page:      int             = Query(20, ge=1, le=1000),
     db:            Session         = Depends(get_db),
 ):
     skip     = (page - 1) * per_page

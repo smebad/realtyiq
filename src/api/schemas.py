@@ -104,7 +104,7 @@ class SearchRequest(BaseModel):
     min_bedrooms:   Optional[int]   = Field(None, ge=0)
     min_area:       Optional[float] = Field(None, ge=0)
     page:           int             = Field(1, ge=1)
-    per_page:       int             = Field(20, ge=1, le=100)
+    per_page:       int             = Field(20, ge=1, le=1000)
     model_config = {"populate_by_name": True, "protected_namespaces": ()}
 
 # Natural language semantic search query with top-k results for relevance ranking
