@@ -25,7 +25,15 @@ st.set_page_config(
 st.markdown("""
 <style>
     /* Main background */
-    .main { background-color: #f8fafc; }
+    .main { background-color: #f8fafc; color: #1e293b; }
+
+    /* Force all text visible */
+    .stMarkdown, .stText, p, h1, h2, h3, h4, label, div {
+        color: #1e293b !important;
+    }
+
+    /* Except sidebar which stays white text */
+    [data-testid="stSidebar"] * { color: white !important; }
 
     /* Sidebar */
     [data-testid="stSidebar"] {
